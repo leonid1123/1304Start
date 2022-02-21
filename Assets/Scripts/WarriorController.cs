@@ -7,11 +7,13 @@ public class WarriorController : MonoBehaviour
     public Rigidbody2D rb2d; //для работы с физ телом
     private float speed = 500f; //для изменения скорости
     private bool toRight = true; //для отслеживания куда идём
+
+    public groundCheck groundCheck;
+
     void Start()
     {
 
     }
-
     void Update()
     {
         //меняем скорость
@@ -26,14 +28,31 @@ public class WarriorController : MonoBehaviour
             toRight = true; //налево не идем
             gameObject.GetComponent<SpriteRenderer>().flipX = false; //повернуться
         }
+        if (Input.GetButton("Jump") && groundCheck.isGround())
+        {
+            rb2d.velocity = Vector2.up*5f;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //пересечение с объектом
     {
-        if (collision.name == "Key") //если имя объекта с которым пересеклись это KEY
+        if (collision.tag == "Key") //если имя объекта с которым пересеклись это KEY
         {
+            InvokeRepeating("BlinkBlue",0f,0.2f);
+            InvokeRepeating("BlinkWhite", 0.1f, 0.2f);
+            Invoke("CancelInvoke", 1f);
+            GameObject.Find("Canvas").GetComponent<KeyCount>().AddKey();
             Destroy(collision.gameObject); //уничтожить ТОТ объект
         }
+    }
+    public void BlinkBlue()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+    }
+
+    public void BlinkWhite()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
 }
