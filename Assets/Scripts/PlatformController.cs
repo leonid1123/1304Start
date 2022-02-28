@@ -5,18 +5,21 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     private float dir = 1f;
-    private void Start()
-    {
-        InvokeRepeating("changeDir",0f,2.4f);
-    }
+    public Rigidbody2D rb2d;
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.right*0.005f*dir,Space.World);
+        rb2d.velocity = Vector2.right*dir;
     }
     private void changeDir()
     {
         dir *= -1f;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "platformWall")
+        {
+            changeDir();
+        }
     }
 }

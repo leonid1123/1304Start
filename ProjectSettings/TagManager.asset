@@ -7,6 +7,8 @@ TagManager:
   - Key
   - ground
   - border
+  - platformWall
+  - platform
   layers:
   - Default
   - TransparentFX

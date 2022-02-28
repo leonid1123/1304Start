@@ -12,14 +12,14 @@ public class groundCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "ground")
+        if (collision.tag == "ground"|| collision.tag == "platform")
         {
             ground = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag=="ground" )
+        if (collision.tag == "ground" || collision.tag == "platform")
         {
             ground=false;
         }
