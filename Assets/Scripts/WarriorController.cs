@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class WarriorController : MonoBehaviour
 {
-    public Rigidbody2D rb2d; //для работы с физ телом
+    public Rigidbody2D rb2d; //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public Animator animator;
-    private float speed = 600f; //для изменения скорости
-    private bool toRight = true; //для отслеживания куда идём
+    private float speed = 800f; //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private bool toRight = true; //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
     bool onPlatform = false;
     public groundCheck groundCheck;
 
@@ -18,26 +18,27 @@ public class WarriorController : MonoBehaviour
     }
     void Update()
     {
-        //меняем скорость
+        //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (!onPlatform)
         {
             rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, rb2d.velocity.y);
             animator.SetFloat("speed",Mathf.Abs(rb2d.velocity.x));
         }
-        if (toRight && rb2d.velocity.x < 0)//если идем направо, но скорость отрицательная
+        if (toRight && rb2d.velocity.x < 0)//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
-            toRight = false; //направо не идем
+            toRight = false; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
             transform.Rotate(new Vector3(0f, 180f,0f));
-            //gameObject.GetComponent<SpriteRenderer>().flipX = true; //повернуться налево
+            //gameObject.GetComponent<SpriteRenderer>().flipX = true; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
-        if (!toRight && rb2d.velocity.x > 0)//если идем налево, но скорость положительная
+        if (!toRight && rb2d.velocity.x > 0)//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
-            toRight = true; //налево не идем
+            toRight = true; //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
             transform.Rotate(new Vector3(0f, 180f, 0f));
-            //gameObject.GetComponent<SpriteRenderer>().flipX = false; //повернуться
+            //gameObject.GetComponent<SpriteRenderer>().flipX = false; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
         if (Input.GetButton("Jump") && groundCheck.isGround())
         {
+            animator.SetTrigger("jump");
             rb2d.velocity = Vector2.up * 8f;
         }
         if (Input.GetKey(KeyCode.R))
@@ -45,15 +46,15 @@ public class WarriorController : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision) //пересечение с объектом
+    private void OnTriggerEnter2D(Collider2D collision) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     {
-        if (collision.tag == "Key") //если имя объекта с которым пересеклись это KEY
+        if (collision.tag == "Key") //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ KEY
         {
             InvokeRepeating("BlinkBlue", 0f, 0.2f);
             InvokeRepeating("BlinkWhite", 0.1f, 0.2f);
             Invoke("CancelInvoke", 1f);
             GameObject.Find("Canvas").GetComponent<KeyCount>().AddKey();
-            Destroy(collision.gameObject); //уничтожить ТОТ объект
+            Destroy(collision.gameObject); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
         if (collision.name == "Restart")
         {
@@ -66,7 +67,7 @@ public class WarriorController : MonoBehaviour
         {
             onPlatform = true;
             float plSpd = GameObject.Find("Platform").GetComponent<Rigidbody2D>().velocity.x;
-            //очень костыль!!!
+            //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
             rb2d.velocity = new Vector2(plSpd, rb2d.velocity.y) + new Vector2(Input.GetAxisRaw("Horizontal") * speed/25 * Time.deltaTime, rb2d.velocity.y);
             animator.SetFloat("speed",0f);
         }
