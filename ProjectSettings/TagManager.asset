@@ -43,6 +43,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Clouds1
+    uniqueID: 1727344279
+    locked: 0
+  - name: Clouds2
+    uniqueID: 1158703147
+    locked: 0
+  - name: BackGround
+    uniqueID: 2212455863
+    locked: 0
+  - name: Misk
+    uniqueID: 2658145049
+    locked: 0
+  - name: Player
+    uniqueID: 2454904261
+    locked: 0
+  - name: WallsAndGround
+    uniqueID: 606088529
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

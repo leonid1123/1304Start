@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class WarriorController : MonoBehaviour
 {
     public Rigidbody2D rb2d; //для работы с физ телом
+    public Animator animator;
     private float speed = 600f; //для изменения скорости
     private bool toRight = true; //для отслеживания куда идём
     bool onPlatform = false;
@@ -21,9 +22,8 @@ public class WarriorController : MonoBehaviour
         if (!onPlatform)
         {
             rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, rb2d.velocity.y);
+            animator.SetFloat("speed",Mathf.Abs(rb2d.velocity.x));
         }
-
-
         if (toRight && rb2d.velocity.x < 0)//если идем направо, но скорость отрицательная
         {
             toRight = false; //направо не идем
@@ -45,7 +45,6 @@ public class WarriorController : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision) //пересечение с объектом
     {
         if (collision.tag == "Key") //если имя объекта с которым пересеклись это KEY
@@ -67,7 +66,9 @@ public class WarriorController : MonoBehaviour
         {
             onPlatform = true;
             float plSpd = GameObject.Find("Platform").GetComponent<Rigidbody2D>().velocity.x;
-            rb2d.velocity = new Vector2(plSpd, rb2d.velocity.y) + new Vector2(Input.GetAxisRaw("Horizontal") * speed/50 * Time.deltaTime, rb2d.velocity.y);
+            //очень костыль!!!
+            rb2d.velocity = new Vector2(plSpd, rb2d.velocity.y) + new Vector2(Input.GetAxisRaw("Horizontal") * speed/25 * Time.deltaTime, rb2d.velocity.y);
+            animator.SetFloat("speed",0f);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -81,10 +82,8 @@ public class WarriorController : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
-
     public void BlinkWhite()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
-
 }
