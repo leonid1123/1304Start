@@ -15,6 +15,8 @@ public class groundCheck : MonoBehaviour
         if (collision.tag == "ground"|| collision.tag == "platform")
         {
             ground = true;
+            GameObject.Find("Warrior").GetComponent<Animator>().SetBool("isJump",false);//TRASH!!!!!
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

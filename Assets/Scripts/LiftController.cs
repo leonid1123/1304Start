@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LiftController : MonoBehaviour
 {
+    public float upperBorder;
+    public float downBorder;
     public Rigidbody2D rb2d;
     private int dir = 0;
     bool upStop=false; //лифт стоит наверху
@@ -15,12 +17,12 @@ public class LiftController : MonoBehaviour
 
         rb2d.velocity = Vector2.up*dir;
 
-        if(goUp && rb2d.position.y>=-0.7) {
+        if(goUp && rb2d.position.y>=upperBorder) {//-0.7
             goUp = false;
             upStop = true;
             dir=0;
         }
-        if(goDown && rb2d.position.y<=-2.6) {
+        if(goDown && rb2d.position.y<=downBorder) {//-2.6
             goDown = false;
             downStop = true;
             dir=0;

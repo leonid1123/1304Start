@@ -14,7 +14,7 @@ public class KeyCount : MonoBehaviour
 
     void Update()
     {
-        text.text = "Количество ключей: "+keys.ToString();
+        text.text = "РљРѕР»РёС‡РµСЃС‚РІРѕ РєР»СЋС‡РµР№: "+keys.ToString();
     }
     public void AddKey()
     {
