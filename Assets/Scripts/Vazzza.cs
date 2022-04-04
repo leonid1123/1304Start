@@ -7,11 +7,8 @@ public class Vazzza : MonoBehaviour {
     void Start() {
         an.speed = 0;
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.name == "Warrior") {
-            an.speed = 1;
-        }
+    public void Crash() {
+        an.speed = 1;
     }
     public void DestroyVaza() {
         Destroy(gameObject);

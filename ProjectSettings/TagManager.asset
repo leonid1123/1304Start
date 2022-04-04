@@ -9,6 +9,8 @@ TagManager:
   - border
   - platformWall
   - platform
+  - Vaza
+  - Chest
   layers:
   - Default
   - TransparentFX

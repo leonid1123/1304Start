@@ -20,4 +20,7 @@ public class KeyCount : MonoBehaviour
     {
         keys++;
     }
+    public int GetKeysCount() {
+        return keys;
+    }
 }
