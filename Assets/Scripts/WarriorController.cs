@@ -68,7 +68,12 @@ public class WarriorController : MonoBehaviour {
             int keys = GameObject.Find("Canvas").GetComponent<KeyCount>().GetKeysCount();
             if (keys>0) {
                 collision.GetComponent<ChestController>().OpenSelf();
+                GameObject.Find("Canvas").GetComponent<KeyCount>().RemoveKey();
             }
+        }
+        if (collision.tag=="Coin") {
+            GameObject.Find("Canvas").GetComponent<KeyCount>().AddCoin();
+            Destroy(collision.gameObject);
         }
         if (collision.name == "Restart") {
             SceneManager.LoadScene("SampleScene");

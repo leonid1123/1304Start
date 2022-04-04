@@ -11,6 +11,7 @@ TagManager:
   - platform
   - Vaza
   - Chest
+  - Coin
   layers:
   - Default
   - TransparentFX
