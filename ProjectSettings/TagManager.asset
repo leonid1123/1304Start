@@ -12,6 +12,7 @@ TagManager:
   - Vaza
   - Chest
   - Coin
+  - mobWall
   layers:
   - Default
   - TransparentFX

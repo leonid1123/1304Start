@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class WarriorController : MonoBehaviour {
     public Rigidbody2D rb2d;
     public Animator animator;
-    private float speed = 600f;
+    private float speed = 200f;
     private bool toRight = true;
     bool onPlatform = false;
     public groundCheck groundCheck;
